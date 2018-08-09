@@ -1,0 +1,31 @@
+.jumbotron{
+    background: transparent;
+    border: 1px solid gray;
+}
+
+.table{
+    color: black;
+}
+
+.table th{
+    background: lightgrey;
+    padding: 11px;
+}
+
+.table td{
+    padding: 11px;
+}
+
+#dataRow{
+    height: 400px;
+    overflow-y: scroll;
+}
+#err{
+    text-align: center;
+}
+
+@media (max-width: 768px) { 
+    #sbm{
+        width: 100%;
+    }
+ }
