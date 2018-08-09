@@ -12,8 +12,10 @@ var app = angular.module("searchApp",[])
             };
         }
     ])
-.controller("searchCon", function ($scope,$http) {
-   
+.controller("searchCon", function ($scope,$http,$timeout) {
+    
+    $scope.load = 0;
+    
     $http.get('https://data.cityofnewyork.us/resource/5scm-b38n.json').then(function(data) {
         var data = $scope.data = data.data;
     })
@@ -22,6 +24,8 @@ var app = angular.module("searchApp",[])
     $scope.submit = function() {
         var f = $scope.fname;
         var l = $scope.lname;
+        $scope.load = 0;
+        $scope.prog = true;
         
         if(f&&l){
             $http({
@@ -33,6 +37,7 @@ var app = angular.module("searchApp",[])
                 }
             }).then(function (data) {
                 var data = $scope.data = data.data;
+                $scope.load = 100;
             });
 
             
@@ -49,6 +54,7 @@ var app = angular.module("searchApp",[])
                     }
                 }).then(function (data) {
                     var data = $scope.data = data.data;
+                    $scope.load = 100;
                 });
             }
             if(l) {
@@ -61,10 +67,17 @@ var app = angular.module("searchApp",[])
                 }
             }).then(function (data) {
                 var data = $scope.data = data.data;
+                $scope.load = 100;
             });
         }
     }
         $scope.fname = $scope.lname = null;
+        $timeout(function() {
+            $scope.prog=false;
+            $scope.load = 0;
+        },2000);
+
+
 
         $scope.go = function() {
             alert('dwdwdd');
